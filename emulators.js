@@ -1,105 +1,50 @@
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const readline = require("readline");
-const { clearInterval } = require("timers");
+const configs = require("./configs.json");
+const emulatorURI = '/emulator/emulator.exe';
+let emulatorPath = "";
 
-exec("emulator -list-avds", (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
+// console.log(configs.AndroidSdkPath)
+
+if (configs.AndroidSdkPath.length > 0) {
+    emulatorPath = configs.AndroidSdkPath + emulatorURI;
+} else {
+
+    emulatorPath = "C"
+}
+
+
+
+
+
+
+
+function runEmulator(index) {
+
+    if (index >= emulators.length) {
+        console.log("Cant run emulator with index '" + index + "', since it doesnot exist.");
         return;
     }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    var lines = stdout.split(/[\n]/);
-    lines = lines.map((v) => {
-        return v.trim();
+    console.log(`Running Emulator "${emulators[index]}".`);
+    ranOneEmulator = true;
 
-    }).filter((v) => {
-        return v.length > 0;
-    })
+    rl.close();
+    console.log("Emulator " + emulators[index] + " ran.");
 
-    // const waitUserInputTill = 10000;
+    // const emul = spawn("emulator", ['-avd', emulators[index], '-no-snapshot']);
+    const emul = spawn("ping", ['google.com']);
 
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    // var timeLimitExceeded = false;
-    // var timeout = setTimeout(function() {
-    //     timeLimitExceeded = true;
-    //     runEmulator(0);
-    //     rl.close();
-    //     clearTimeout(timeout);
+    emul.stdout.on("data", (data) => console.log(data.toString()));
 
-    // }, waitUserInputTill)
+    emul.stderr.on("data", data => console.log("Emulator Error: " + data));
+
+    emul.on("close", code => console.log("Bye Bye. \nEmulator closed with exit code " + code))
 
 
-    // var timerInterval = 1000;
-    // var elapsedTime = timerInterval;
-    // var timer = setInterval(() => {
-    // elapsedTime += timerInterval;
-    // process.stdout.write('\033c');
-    // console.log(`\n"${lines[0]}" will run by default in ${waitUserInputTill - elapsedTime} ms. Press: \n`);
-    console.log(`\n\n\t${lines.length} emulators found. \n\nPress:\n`);
-    lines.forEach((v, i) => {
-        console.log(`${i} for ${v}\n`);
-    })
-    readInput();
-    // console.log("Your choice: ");
-    // }, timerInterval);
+}
 
-    function readInput() {
-        rl.question("Your Choice: ", function(choice) {
-            console.log("you entered: " + choice);
-            var choosenNumber = parseInt(choice);
-            if (choosenNumber < lines.length && choosenNumber >= 0) {
-                runEmulator(choice);
-                rl.close();
-            } else {
-                // if (!timeLimitExceeded) {
-                console.log("Invalid choice. Choose Again!!");
-                readInput();
-                // } else {
-                //     rl.close();
-                // }
-            }
-        })
+// rl.on("close", function() {
+//     console.log("\nBYE BYE !!!");
+// });
 
-    }
-    var ranOneEmulator = false;
-
-    function runEmulator(index) {
-        if (ranOneEmulator) {
-            console.log("One emulator already ran. Cancelling request to run emulator " + lines[index]);
-            return;
-        }
-        if (index >= lines.length) {
-            console.log("Cant run emulator with index '" + index + "', since it doesnot exist.");
-            return;
-        }
-        console.log(`Running Emulator "${lines[index]}".`);
-        ranOneEmulator = true;
-        // clearInterval(timer);
-        // clearTimeout(timeout);
-        rl.close();
-        // console.log("Emulator " + lines[index] + " ran.");
-        exec("emulator -avd " + lines[index] + " -no-snapshot", function(error, stdout, stderr) {
-            if (error) {
-                console.log("Error occurred: " + error);
-            }
-            if (stderr) {
-                console.log("STDError: " + stderr);
-            }
-            ranOneEmulator = true;
-
-            console.log(stdout);
-        })
-
-    }
-
-    rl.on("close", function() {
-        console.log("\nBYE BYE !!!");
-    });
-
-});
+// });
