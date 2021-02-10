@@ -1,7 +1,7 @@
-const { exec, spawn } = require("child_process");
-const readline = require("readline");
+// const { exec, spawn } = require("child_process");
+// const readline = require("readline");
 const emulators = require("./functions")
-const process = require("process")
+    // const process = require("process")
 
 emulators.showWelcomeMesesage();
 

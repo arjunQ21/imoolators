@@ -34,6 +34,19 @@ const emulators = {
     },
 
     choose: function() {
+        // const stringInputs = {
+        //     all: [{
+        //             key: 'gencmd',
+        //             description: 'Generate Execuatable .cmd file',
+        //             handler: () => console.log("not supported now")
+        //         },
+        //         {
+        //             key: 'x',
+        //             description: 'Exit',
+        //             handler: () => process.exit(0)
+        //         }
+        //     ],
+        // };
         const ref = this;
         return new Promise(function(resolve, reject) {
             if (ref.all.length == 0) reject("Empty Emulators Array supplied.")
@@ -49,8 +62,13 @@ const emulators = {
                 console.log(`      ${i++}  for  ${emulator}`)
             })
 
+            console.log(`\n      x  to  exit`)
+
             function readInput() {
                 rl.question("\nYour Choice: ", function(choice) {
+                    if (choice.trim().toLocaleLowerCase() == 'x') {
+                        process.exit(0);
+                    }
                     console.log("you entered: " + choice);
                     const choosenNumber = parseInt(choice);
                     if (choosenNumber < ref.all.length && choosenNumber >= 0) {
@@ -78,8 +96,8 @@ const emulators = {
         // rl.close();
         // console.log("Emulator " + this.all[index] + " ran.");
 
-        const emul = spawn("emulator", ['-avd', this.all[index], '-no-snapshot']);
-        // const emul = spawn("ping", ['google.com']);
+        // const emul = spawn("emulator", ['-avd', this.all[index], '-no-snapshot']);
+        const emul = spawn("ping", ['google.com']);
 
         emul.stdout.on("data", (data) => console.log(data.toString()));
 
@@ -93,9 +111,10 @@ const emulators = {
     showWelcomeMesesage: function() {
         console.log(`
         
-        \t█▀▀ █▀▄▀█ █ █ █   █▀█ ▀█▀ █▀█ █▀█ █▀
-        \t██▄ █ ▀ █ █▄█ █▄▄ █▀█  █  █▄█ █▀▄ ▄█
-        
+
+        █▀▀ █▀▄▀█ █░█ █░░ █▀█ ▀█▀ █▀█ █▀█ █▀
+        ██▄ █░▀░█ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄ ▄█
+
     Running Android Emulators without opening Android Studio
 
 Documentation: arjunq21.github.io/emulators/
@@ -108,19 +127,5 @@ Starting...
     },
 
 }
-
-
-
-
-
-
-// async function getCurrentUserName() {
-//     return new Promise(function(resolve, reject) {
-//         exec("echo %USERNAME%", (error, stdout, stderr) => {
-//             if (error || stderr) reject("Error Occurred getting username.");
-//             resolve(stdout.toString())
-//         })
-//     })
-// }
 
 module.exports = emulators
