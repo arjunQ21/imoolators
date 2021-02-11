@@ -91,3 +91,5 @@ Steps:
 
 **NOTE**:
 This program is dependent on Android Studio. To Add, Delete or Update your emulators, you should do it through Andorid Studio.
+
+You can make my day by **Star**-ring this repo. 😀🧐
