@@ -7,9 +7,11 @@ Tired of opening Andorid Studio everytime you want to launch an emulator?
 This program comes to your rescue.
 This program helps you lauch emulators installed via Android Studio, without having to open Android Studio.
 
-## Demo
+## This is how it looks
 
 ![Imoolators Demo](https://raw.githubusercontent.com/arjunQ21/imoolators/master/docs/images/imoolators-demo.png?token=ALBRSXTEZVAJKQF7HBS45JTAFZSM6)
+
+Now lets help you set this up.
 
 ## Basic Requirements
 
