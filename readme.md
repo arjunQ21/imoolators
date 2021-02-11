@@ -20,7 +20,7 @@ Make sure you have installed
 * Extract downloaded file and rename extracted folder "imoolators-master" to "**imoolators**".
 * You can place extracted folder anyhwere on the system. For now lets do it at *D:\CustomPrograms\\*
 
-    If you have followed correctly, the path to imoolators.js will then be *D:\CustomPrograms\imoolators\imoolators.js*
+    If you have followed correctly, then you should see a file "imoolators.js" at *D:\CustomPrograms\imoolators\\*
 
 * Make sure your environment variable **PATH** contains path to Node.js. You can confirm it by opening a new command window and running
 
@@ -48,7 +48,40 @@ If you have followed the same directory structure as recommended, your command s
 
         D:\CustomPrograms\imoolators> node imoolators.js
 
-Hopefully, things should work now.
+This is all. Things should work as expected for now.
+
+Better option for more customization is discussed below.
+
+## Pro Tip
+
+You can launch imoolators from any directory in your system if you follow these steps:
+
+The idea is to make a simple executable file that contains this single line:
+
+        node D:\CustomPrograms\imoolators\imoolators.js
+The path *D:\CustomPrograms\imoolators\imoolators.js* may be different in your case if you have not created directory structures as recommended.
+
+Steps:
+
+* Create a new file named "**imoolators.<custom_extenstion>**" in the directory where imoolators\imoolators.js exist. The extension of this file is dependent on your system.
+  * For windows, set filename as 'imoolators.cmd'
+  * For mac and linux, set filename as 'imoolators.sh'
+
+* The above file contains a single line
+
+  "node <absolute_path_to_imoolators_folder>/imoolaotors.js"
+
+  If you have set directory structures as recommended, the content in file looks like
+
+        node D:\CustomPrograms\imoolators\imoolators.js
+* Save the file
+* Add **<absolute_path_to_imoolators_folder>** to your **PATH** environment variable. i.e, add
+
+        D:\CustomPrograms\imoolators
+    to your PATH.
+* This is all. To test you have done it right, open up a new command window at any directory and run
+
+        C:\Any\Directory> imoolators
 
 **NOTE**:
 This program is dependent on Android Studio. To Add, Delete or Update your emulators, you should do it through Andorid Studio.

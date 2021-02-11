@@ -96,8 +96,8 @@ const emulators = {
         // rl.close();
         // console.log("Emulator " + this.all[index] + " ran.");
 
-        // const emul = spawn("emulator", ['-avd', this.all[index], '-no-snapshot']);
-        const emul = spawn("ping", ['google.com']);
+        const emul = spawn("emulator", ['-avd', this.all[index], '-no-snapshot']);
+        // const emul = spawn("ping", ['google.com']);
 
         emul.stdout.on("data", (data) => console.log(data.toString()));
 
@@ -112,12 +112,13 @@ const emulators = {
         console.log(`
         
 
-        █▀▀ █▀▄▀█ █░█ █░░ █▀█ ▀█▀ █▀█ █▀█ █▀
-        ██▄ █░▀░█ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄ ▄█
+            █ █▀▄▀█ █▀█ █▀█ █   ▄▀█ ▀█▀ █▀█ █▀█ █▀
+            █ █ ▀ █ █▄█ █▄█ █▄▄ █▀█  █  █▄█ █▀▄ ▄█
+
 
     Running Android Emulators without opening Android Studio
 
-Documentation: arjunq21.github.io/emulators/
+Documentation: https://github.com/arjunq21/imoolators/
 
 By: arjunQ21
 
